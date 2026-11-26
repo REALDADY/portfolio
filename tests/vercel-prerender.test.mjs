@@ -60,6 +60,7 @@ test("index.html is a ProfilePage whose single Person matches the visible bio", 
     "https://www.linkedin.com/in/mohamed-amin-jbari-223237364/",
     "https://www.instagram.com/real3adi/",
     "https://github.com/REALDADY",
+    "https://ai.lounge.ai/@real3adi",
   ]);
   assert.equal(person.image.url, `${site}/mohamed-amin-real3adi.jpg`);
   assert.equal(person.worksFor["@id"], "https://www.haak-org.com");

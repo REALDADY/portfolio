@@ -50,6 +50,7 @@ export const profiles = [
   { label: "LinkedIn", handle: "Mohamed Amin", url: "https://www.linkedin.com/in/mohamed-amin-jbari-223237364/" },
   { label: "Instagram", handle: "@real3adi", url: "https://www.instagram.com/real3adi/" },
   { label: "GitHub", handle: "REALDADY", url: "https://github.com/REALDADY" },
+  { label: "AI Lounge", handle: "@real3adi", url: "https://ai.lounge.ai/@real3adi" },
 ] as const;
 
 /** Real headshot — shown in the About section and used as Person.image. */
