@@ -187,7 +187,7 @@ export const projects: Project[] = [
       "IT services",
       "Interactive web experiences",
     ],
-    liveUrl: "https://haak-sigma.vercel.app/",
+    liveUrl: "https://haak-org.com/",
     coverAsset: "/projects/haak.png",
     coverAlt: "HAAK Solutions public website",
     visual: "practice",

@@ -36,8 +36,18 @@ export const personBio =
  * Rendered as visible rel="me" links and emitted as Person.sameAs.
  */
 export const profiles = [
+  { label: "LinkedIn", handle: "Mohamed Amin", url: "https://www.linkedin.com/in/mohamed-amin-jbari-223237364/" },
+  { label: "Instagram", handle: "@real3adi", url: "https://www.instagram.com/real3adi/" },
   { label: "GitHub", handle: "REALDADY", url: "https://github.com/REALDADY" },
 ] as const;
+
+/** Real headshot — shown in the About section and used as Person.image. */
+export const headshot = {
+  path: "/mohamed-amin-real3adi.jpg",
+  width: 720,
+  height: 960,
+  alt: "Portrait of Mohamed Amin (real3adi), designer and full-stack developer in Dubai",
+} as const;
 
 export const contact = {
   email: "amijbari8@gmail.com",
@@ -193,6 +203,7 @@ export function buildJsonLd(route: RouteKey = "home", modified = todayIso()) {
         isPartOf: { "@id": ids.website },
         dateCreated: PROFILE_CREATED,
         dateModified: modified,
+        primaryImageOfPage: { "@id": `${SITE_URL}/#headshot` },
         mainEntity: {
           "@type": "Person",
           "@id": ids.person,
@@ -201,6 +212,15 @@ export function buildJsonLd(route: RouteKey = "home", modified = todayIso()) {
           jobTitle: owner.jobTitle,
           description: personBio,
           url: `${SITE_URL}/`,
+          image: {
+            "@type": "ImageObject",
+            "@id": `${SITE_URL}/#headshot`,
+            url: `${SITE_URL}${headshot.path}`,
+            contentUrl: `${SITE_URL}${headshot.path}`,
+            width: headshot.width,
+            height: headshot.height,
+            caption: owner.displayName,
+          },
           mainEntityOfPage: { "@id": ids.profilePage },
           sameAs: profiles.map((profile) => profile.url),
           email: `mailto:${contact.email}`,

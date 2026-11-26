@@ -13,7 +13,7 @@ import {
   type ProjectCategory,
 } from "./project-data";
 import { ProjectVisual } from "./project-visual";
-import { contact, mailtoLink, owner, profiles, routeSeo, whatsappLink } from "./site-config";
+import { contact, headshot, mailtoLink, owner, profiles, routeSeo, whatsappLink } from "./site-config";
 import { FlightHud, SpaceCanvas } from "./space-canvas";
 import { SITE_CONTENT_ID, useModal } from "./use-modal";
 import { prefersReducedMotion, scrollToTarget, setScrollLock, useMotionSystem } from "./use-motion-system";
@@ -344,6 +344,14 @@ function AboutSection({ onContact, onWork }: { onContact: () => void; onWork: ()
       <SectorLabel index="01" codename="Orbit">About</SectorLabel>
       <div className="about-grid">
         <div className="about-copy" data-reveal>
+          <figure className="about-portrait">
+            <img src={headshot.path} alt={headshot.alt} width={headshot.width} height={headshot.height} loading="lazy" decoding="async" />
+            <figcaption>
+              <b>{owner.name}</b>
+              <span>{`${owner.alternateName} · ${owner.jobTitle}`}</span>
+              <span>{`${owner.locality}, ${owner.countryName}`}</span>
+            </figcaption>
+          </figure>
           <h2 id="about-title">One developer across the whole stack — from the <em>first pixel</em> to the <em>production server.</em></h2>
           <p>I’m <strong>{owner.name}</strong> — known online as <strong>{owner.alternateName}</strong> — a designer and full-stack developer based in Dubai. My work usually starts with visual direction and interface design, then continues through front-end and back-end development, launch, and the infrastructure it runs on.</p>
           <p>That range matters when a project involves commerce, bilingual Arabic / English journeys, internal workflows, integrations, security or SAP — not just a marketing page. You work with one accountable owner instead of a hand-off chain.</p>

@@ -50,7 +50,16 @@ test("index.html is a ProfilePage whose single Person matches the visible bio", 
   assert.equal(person["@id"], `${site}/#person`);
   assert.equal(person.name, "Mohamed Amin");
   assert.equal(person.alternateName, "real3adi");
-  assert.deepEqual(person.sameAs, ["https://github.com/REALDADY"]);
+  assert.deepEqual(person.sameAs, [
+    "https://www.linkedin.com/in/mohamed-amin-jbari-223237364/",
+    "https://www.instagram.com/real3adi/",
+    "https://github.com/REALDADY",
+  ]);
+  assert.equal(person.image.url, `${site}/mohamed-amin-real3adi.jpg`);
+  // Every sameAs profile is also a visible rel="me" link, and the headshot is on the page.
+  for (const url of person.sameAs) assert.ok(html.includes(`href="${url}" rel="me`), `${url} is linked visibly`);
+  assert.match(html, /<img src="\/mohamed-amin-real3adi\.jpg" alt="Portrait of Mohamed Amin \(real3adi\)/);
+  await readFile(new URL("mohamed-amin-real3adi.jpg", distDir));
   // Only one full Person definition; everything else references it by @id.
   const fullPersons = JSON.stringify(blocks).match(/"@type":"Person"/g) ?? [];
   assert.equal(fullPersons.length, 1);
