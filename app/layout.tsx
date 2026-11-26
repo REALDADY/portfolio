@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif, Unbounded } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { absoluteUrl, ogImage, owner, routeSeo, serializeJsonLd, SITE_NAME, SITE_URL, THEME_COLOR } from "./site-config";
 
@@ -11,12 +11,6 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const unbounded = Unbounded({
-  variable: "--font-unbounded",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -70,13 +64,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: THEME_COLOR,
-  colorScheme: "dark",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${unbounded.variable} ${instrumentSerif.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd() }} />
         {children}
       </body>

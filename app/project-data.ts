@@ -43,8 +43,6 @@ export type Project = {
   relatedUrlLabel?: string;
   coverAsset?: string;
   coverAlt?: string;
-  conceptAsset?: string;
-  conceptAlt?: string;
   visual: VisualType;
   challenge: string;
   approach: string;
@@ -81,8 +79,6 @@ export const projects: Project[] = [
     ],
     relatedUrl: "https://rswater.ae/",
     relatedUrlLabel: "View public commerce website",
-    conceptAsset: "/projects/alrawdah-platform-concept.webp",
-    conceptAlt: "Concept visual of a mobile mineral-water ordering product on two smartphones",
     visual: "commerce",
     challenge:
       "Bring a fragmented customer ordering journey into one product spanning mobile commerce, account services, fulfilment and administration.",
@@ -117,8 +113,6 @@ export const projects: Project[] = [
       "RAK / Abu Dhabi connectivity",
       "Backup and disaster recovery",
     ],
-    conceptAsset: "/projects/infrastructure-concept.webp",
-    conceptAlt: "Concept visual of a real enterprise server room and infrastructure estate",
     visual: "infrastructure",
     challenge:
       "Rebuild a business-critical infrastructure estate so core services, SAP workloads and branch connectivity could operate within a controlled and recoverable environment.",
@@ -153,8 +147,6 @@ export const projects: Project[] = [
       "Customer reporting",
       "Operational reporting",
     ],
-    conceptAsset: "/projects/sap-systems-concept.webp",
-    conceptAlt: "Concept visual of an operational ERP dashboard inside a mineral-water warehouse",
     visual: "erp",
     challenge:
       "Turn ERP data and operational workflows into reliable controls and reporting for warehouse, inventory, production and management needs.",
@@ -188,7 +180,7 @@ export const projects: Project[] = [
       "Interactive web experiences",
     ],
     liveUrl: "https://haak-org.com/",
-    coverAsset: "/projects/haak.png",
+    coverAsset: "/projects/haak-solutions.jpg",
     coverAlt: "HAAK Solutions public website",
     visual: "practice",
     challenge:
@@ -224,8 +216,6 @@ export const projects: Project[] = [
       "Excel export",
       "Arabic / English support",
     ],
-    conceptAsset: "/projects/falcon-crm-concept.webp",
-    conceptAlt: "Concept visual of a private dealership CRM on a laptop in a premium showroom",
     visual: "crm",
     challenge:
       "Give dealership staff one controlled system for customer, vehicle, cash, finance and document records without exposing operational data publicly.",
@@ -260,8 +250,6 @@ export const projects: Project[] = [
       "WhatsApp / WATI integration",
       "Deferred SAP synchronization",
     ],
-    conceptAsset: "/projects/delivery-platform-concept.webp",
-    conceptAlt: "Concept visual of a delivery dispatch desk with route planning and mobile operations",
     visual: "delivery",
     challenge:
       "Support day-to-day delivery operations independently without closing the door on future SAP integration.",
@@ -295,8 +283,6 @@ export const projects: Project[] = [
       "Endpoint hardening",
       "Staged testing and deployment",
     ],
-    conceptAsset: "/projects/cybersecurity-concept.webp",
-    conceptAlt: "Concept visual of an enterprise cybersecurity operations workspace",
     visual: "security",
     challenge:
       "Reduce identity and endpoint risk without introducing uncontrolled policy changes into an operating enterprise environment.",
@@ -330,8 +316,6 @@ export const projects: Project[] = [
       "Late and absence calculations",
       "HR dashboards",
     ],
-    conceptAsset: "/projects/hrms-attendance-concept.webp",
-    conceptAlt: "Concept visual of biometric attendance hardware and an HR operations dashboard",
     visual: "hrms",
     challenge:
       "Turn biometric events and HR rules into dependable attendance calculations and operational visibility.",
@@ -351,13 +335,12 @@ export const projects: Project[] = [
       "A polished bilingual storefront balancing atmospheric brand design with practical product, cart and account journeys.",
     category: "Web",
     projectType: "Public Website · Bilingual Commerce",
-    status: "Live Product",
-    statusKind: "live",
+    status: "Build / Case Study",
+    statusKind: "case-study",
     featured: false,
     role: "Web design · Frontend development · Commerce UX",
     technologies: ["React", "Product catalogue", "Cart flows", "Google Identity", "Arabic / English"],
     capabilities: ["Product catalogue", "Quantity controls", "Cart", "Customer access", "Responsive commerce", "Bilingual UI"],
-    liveUrl: "https://sahaba-frontend.vercel.app/",
     coverAsset: "/projects/sahaba.png",
     coverAlt: "Sahaba Water public ecommerce website",
     visual: "browser",
@@ -367,7 +350,7 @@ export const projects: Project[] = [
       "Combine premium brand presentation with practical catalogue, quantity, cart and account interactions.",
     solution:
       "A responsive React commerce experience with a product collection, cart controls, account access, Google identity integration and Arabic / English support.",
-    statusNote: "This product has a publicly accessible live deployment.",
+    statusNote: "The storefront was built and deployed; its public deployment is currently offline, so it is shown here as a case study with a capture of the live build.",
   },
   {
     index: "10",
@@ -420,8 +403,6 @@ export const projects: Project[] = [
       "Performance",
       "Brand positioning",
     ],
-    conceptAsset: "/projects/seo-transformation-concept.webp",
-    conceptAlt: "Concept visual of a web design and technical SEO performance workstation",
     visual: "seo",
     challenge:
       "Make corporate and commerce websites easier to discover, faster to use and clearer about the businesses they represent.",
@@ -473,8 +454,8 @@ export const projects: Project[] = [
       "A multi-page website for a premium still and sparkling bottled-water brand, built around a black, white and silver system, motion and 3D.",
     category: "Web",
     projectType: "Brand Website · Motion Design · 3D",
-    status: "Build / Case Study",
-    statusKind: "case-study",
+    status: "Live Public Website",
+    statusKind: "live",
     featured: false,
     role: "Visual system · Motion · Front-end development",
     technologies: ["Next.js", "React Three Fiber", "drei", "Motion design", "Arabic font support"],
@@ -486,6 +467,9 @@ export const projects: Project[] = [
       "3D scenes with React Three Fiber and drei",
       "Arabic font support",
     ],
+    liveUrl: "https://revanawater.ae/",
+    coverAsset: "/projects/revana.jpg",
+    coverAlt: "Revana premium bottled water website — still and sparkling bottles in the hero",
     visual: "brand-3d",
     challenge:
       "Present a premium still and sparkling bottled-water brand with the restraint and finish expected of a premium product.",
@@ -493,8 +477,7 @@ export const projects: Project[] = [
       "Hold the whole site to a strict black, white and silver palette, and let motion and real-time 3D carry the product rather than decoration.",
     solution:
       "A multi-page Next.js website with a monochrome visual system, motion design, 3D product scenes built with React Three Fiber and drei, and Arabic font support.",
-    statusNote:
-      "This is a build presented as a case study. No public deployment is linked from the portfolio.",
+    statusNote: "This website is live at revanawater.ae.",
   },
   {
     index: "14",
@@ -650,12 +633,12 @@ export const labExperiments: LabExperiment[] = [
 ];
 
 const featuredProjectOrder = [
-  "alrawdah-digital-commerce-platform",
   "alrawdah-public-commerce-website",
+  "haak-solutions",
+  "revana-bottled-water-website",
+  "alrawdah-digital-commerce-platform",
   "infrastructure-disaster-recovery-transformation",
   "falcon-crm",
-  "haak-solutions",
-  "independent-delivery-management-platform",
 ];
 
 export const featuredProjects = featuredProjectOrder
@@ -667,16 +650,9 @@ export const getProject = (slug: string) => projects.find((project) => project.s
 /** Intrinsic sizes of the raster assets, so every image reserves its space (no layout shift). */
 export const imageSizes: Record<string, { width: number; height: number }> = {
   "/projects/rs-water.png": { width: 1272, height: 716 },
-  "/projects/haak.png": { width: 1265, height: 712 },
+  "/projects/haak-solutions.jpg": { width: 1280, height: 800 },
+  "/projects/revana.jpg": { width: 1280, height: 800 },
   "/projects/sahaba.png": { width: 1265, height: 712 },
-  "/projects/alrawdah-platform-concept.webp": { width: 760, height: 505 },
-  "/projects/infrastructure-concept.webp": { width: 760, height: 505 },
-  "/projects/sap-systems-concept.webp": { width: 760, height: 505 },
-  "/projects/falcon-crm-concept.webp": { width: 760, height: 505 },
-  "/projects/delivery-platform-concept.webp": { width: 760, height: 505 },
-  "/projects/cybersecurity-concept.webp": { width: 760, height: 505 },
-  "/projects/hrms-attendance-concept.webp": { width: 760, height: 505 },
-  "/projects/seo-transformation-concept.webp": { width: 760, height: 505 },
 };
 
 export const projectCategories: Array<"All" | ProjectCategory> = [

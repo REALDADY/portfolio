@@ -10,7 +10,7 @@ const configuredUrl = (import.meta as ImportMeta & { env?: Record<string, string
 // Production canonical origin: the real3adi.space custom domain on GitHub Pages.
 export const SITE_URL = (configuredUrl || "https://real3adi.space").replace(/\/+$/, "");
 export const SITE_NAME = "Mohamed Amin (real3adi) — Designer & Full-Stack Developer";
-export const THEME_COLOR = "#07060b";
+export const THEME_COLOR = "#f6f4ef";
 
 export const owner = {
   /** Full legal name — the entity name in structured data. */
@@ -113,7 +113,7 @@ export const routeSeo: Record<RouteKey, { path: string; title: string; descripti
 };
 
 export const ogImage = {
-  url: `${SITE_URL}/og-systems.png`,
+  url: `${SITE_URL}/og-mohamed-amin.jpg`,
   width: 1200,
   height: 630,
   alt: "Mohamed Amin (real3adi) — designer and full-stack developer in Dubai",

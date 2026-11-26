@@ -26,14 +26,19 @@ test("renders the professional portfolio homepage", async () => {
   assert.match(html, /Selected work/);
   assert.match(html, /Alrawdah Digital Platform/);
   assert.match(html, /Infrastructure Transformation/);
-  assert.match(html, /Lab \/ experiments/);
-  assert.match(html, /Experiments in/);
   assert.match(html, /\/projects\/rs-water\.png/);
-  assert.match(html, /\/projects\/haak\.png/);
+  assert.match(html, /\/projects\/haak-solutions\.jpg/);
+  assert.match(html, /\/projects\/revana\.jpg/);
+  assert.match(html, /\/mohamed-amin-real3adi\.jpg/);
   assert.match(html, /amijbari8@gmail\.com/);
   assert.match(html, /971551959820/);
-  assert.doesNotMatch(html, /cosmos-stage|shooting-star/);
-  assert.doesNotMatch(html, /falcon-crm-xi|falcon-crm\.png/);
+});
+
+test("homepage uses only real imagery — no generated concept art or WebGL scene", async () => {
+  const html = await (await render()).text();
+  assert.doesNotMatch(html, /concept\.webp|og-systems|CONCEPT VISUAL/);
+  assert.doesNotMatch(html, /space-canvas|data-hud|sector-codename|amin@dxb/);
+  assert.doesNotMatch(html, /WebGLRenderer/);
 });
 
 test("homepage tells the full story with clear calls to action", async () => {
@@ -44,18 +49,17 @@ test("homepage tells the full story with clear calls to action", async () => {
   for (const title of ["Kifaya", "Revana", "Ticket System", "Bottle Tracking", "Dispatch Console", "GamerHub UAE"]) {
     assert.match(html, new RegExp(title), `${title} is listed`);
   }
-  assert.match(html, /Real-time trading terminal/);
-  assert.match(html, /Capabilities &amp; stack/);
-  assert.match(html, /Process/);
-  assert.match(html, /amin@dxb/);
-  assert.match(html, /Jump to/);
+  for (const id of ["work", "about", "services", "process", "contact"]) {
+    assert.match(html, new RegExp(`<section[^>]*id="${id}"`), `#${id} section`);
+  }
+  assert.match(html, /Project brief/);
 });
 
 test("homepage ships search metadata and structured data", async () => {
   const html = await (await render()).text();
   assert.match(html, /<html lang="en"/);
   assert.match(html, new RegExp(`<link(?=[^>]*rel="canonical")(?=[^>]*href="${SITE}/?")[^>]*>`));
-  assert.match(html, new RegExp(`og:image"[^>]*content="${SITE}/og-systems\\.png"|content="${SITE}/og-systems\\.png"[^>]*og:image"`));
+  assert.match(html, new RegExp(`og:image"[^>]*content="${SITE}/og-mohamed-amin\\.jpg"|content="${SITE}/og-mohamed-amin\\.jpg"[^>]*og:image"`));
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /"@type":"ProfilePage"/);
   assert.match(html, /"@type":"Person"/);
@@ -72,9 +76,8 @@ test("renders the full work route", async () => {
   assert.match(html, /The work,/);
   assert.match(html, /Cybersecurity Hardening/);
   assert.match(html, /HRMS &amp; Attendance/);
-  assert.match(html, /CONCEPT VISUAL/);
-  assert.match(html, /\/projects\/infrastructure-concept\.webp/);
-  assert.match(html, /\/projects\/falcon-crm-concept\.webp/);
+  assert.match(html, /class="spec/);
+  assert.doesNotMatch(html, /concept\.webp/);
   assert.doesNotMatch(html, /falcon-crm-xi/);
 });
 
@@ -93,26 +96,12 @@ test("work route has category filters, every project and its own metadata", asyn
   assert.doesNotMatch(html, /falcon-crm\.png/);
 });
 
-test("uses the supplied four-color brand palette", async () => {
+test("uses the restrained editorial palette", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  for (const color of ["#ff84ba", "#ffdf82", "#99c2ff", "#ffefe3"]) {
-    assert.match(css.toLowerCase(), new RegExp(color));
+  for (const token of ["--bg: #f6f4ef", "--ink: #141310", "--accent: #0e5a47"]) {
+    assert.ok(css.includes(token), `${token} defined`);
   }
-  assert.match(css, /SPACE LAYER — the site as a flight through a WebGL universe/);
-  assert.match(css, /\.space-canvas/);
-});
-
-test("homepage ships the space journey without blocking content", async () => {
-  const html = await (await render()).text();
-  // The WebGL canvas is an empty, decorative shell in the HTML; the scene loads client-side.
-  assert.match(html, /<div class="space" aria-hidden="true">/);
-  assert.match(html, /<canvas class="space-canvas"><\/canvas>/);
-  assert.match(html, /data-hud="depth"/);
-  assert.match(html, /data-hscroll/);
-  for (const codename of ["Orbit", "Missions", "Systems", "Trajectory", "Lab", "Transmission"]) {
-    assert.match(html, new RegExp(`sector-codename">${codename}<`), `${codename} sector`);
-  }
-  assert.doesNotMatch(html, /WebGLRenderer/, "three.js stays out of the server HTML");
+  assert.doesNotMatch(css, /space-canvas|#ff84ba/);
 });
 
 test("publishes robots.txt and a sitemap for both routes", async () => {

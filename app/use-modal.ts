@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type RefObject } from "react";
-import { setScrollLock } from "./use-motion-system";
+import { setScrollLock } from "./motion";
 
 const FOCUSABLE = [
   "a[href]",
