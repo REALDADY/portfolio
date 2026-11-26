@@ -39,6 +39,11 @@ export type Project = {
   technologies: string[];
   capabilities: string[];
   liveUrl?: string;
+  /** Label for the primary link when it is not a website (e.g. "Download the app"). */
+  liveUrlLabel?: string;
+  storeLinks?: Array<{ label: string; url: string }>;
+  /** Real app screenshots, shown in a phone gallery instead of a browser frame. */
+  appScreens?: Array<{ src: string; alt: string }>;
   relatedUrl?: string;
   relatedUrlLabel?: string;
   coverAsset?: string;
@@ -54,40 +59,54 @@ export const projects: Project[] = [
   {
     index: "01",
     slug: "alrawdah-digital-commerce-platform",
-    title: "Alrawdah Digital Commerce Platform",
+    title: "Alrawdah Springs — Customer Mobile App",
     shortTitle: "Alrawdah Digital Platform",
     shortDescription:
-      "A customer commerce ecosystem connecting ordering, payments, coupons, delivery and account management across mobile and web.",
+      "The Alrawdah Springs customer app for iOS and Android: browse, order and pay for bottled water, pin the exact delivery door on a map and track every order live.",
     category: "Products",
-    projectType: "Digital Commerce · Mobile Product · Enterprise Transformation",
-    status: "Production / Ongoing Development",
-    statusKind: "ongoing",
+    projectType: "Mobile Commerce App · iOS & Android · Backend & Admin",
+    status: "Live on App Store & Google Play",
+    statusKind: "live",
     featured: true,
-    role: "Digital transformation · Product · Technical leadership",
-    technologies: ["iOS", "Android", "Backend APIs", "PostgreSQL", "Supabase", "Payment gateway", "Push notifications"],
+    role: "Product design · Mobile & backend development · Technical leadership",
+    technologies: ["iOS", "Android", "Backend APIs", "PostgreSQL", "Supabase", "Apple Pay", "tabby", "Maps", "Push notifications"],
     capabilities: [
-      "Customer accounts",
-      "Online ordering",
-      "Wallet and coupon system",
-      "Payment gateway and COD",
-      "Addresses and delivery tracking",
+      "Sign in with Apple, Google or phone",
       "Arabic / English",
+      "Categories, offers and value packs",
+      "Cart with free-delivery threshold and promo codes",
+      "Map pin for the exact delivery door",
+      "Card, Apple Pay and tabby payments",
+      "Cash or card on delivery",
+      "Delivery windows and live order tracking",
+      "Push notifications",
       "Admin platform",
-      "UAE PASS integration work",
-      "Apple Sign-In",
-      "Future SAP integration",
+    ],
+    liveUrl: "https://onelink.to/jb4gmr",
+    liveUrlLabel: "Download the app",
+    storeLinks: [
+      { label: "App Store", url: "https://apps.apple.com/ae/app/alrawdah-springs/id6777939864" },
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=ae.rswater.customer" },
+    ],
+    appScreens: [
+      { src: "/projects/alrawdah-app/01-login.jpg", alt: "Alrawdah Springs app: Sign-in screen — continue with Apple, Google or phone number" },
+      { src: "/projects/alrawdah-app/02-home.jpg", alt: "Alrawdah Springs app: Home — categories, offers and popular products" },
+      { src: "/projects/alrawdah-app/03-product.jpg", alt: "Alrawdah Springs app: Product page — choose a pack size and add to cart" },
+      { src: "/projects/alrawdah-app/04-cart.jpg", alt: "Alrawdah Springs app: Cart — free delivery threshold, quantities and VAT-inclusive totals" },
+      { src: "/projects/alrawdah-app/05-address-map.jpg", alt: "Alrawdah Springs app: Address — pin the exact door on a map" },
+      { src: "/projects/alrawdah-app/06-payment.jpg", alt: "Alrawdah Springs app: Checkout — card, Apple Pay, tabby, cash or card on delivery" },
+      { src: "/projects/alrawdah-app/07-order-confirmed.jpg", alt: "Alrawdah Springs app: Order confirmed — delivery window and live status" },
     ],
     relatedUrl: "https://rswater.ae/",
-    relatedUrlLabel: "View public commerce website",
+    relatedUrlLabel: "View the Alrawdah Springs website",
     visual: "commerce",
     challenge:
-      "Bring a fragmented customer ordering journey into one product spanning mobile commerce, account services, fulfilment and administration.",
+      "Bring a fragmented water-ordering journey into one customer app, from browsing and payment to delivery to the right door, on both iOS and Android.",
     approach:
-      "Model the platform as connected customer, commerce, delivery and administration services, with bilingual experiences and integration points for identity, payments and future enterprise systems.",
+      "Design the app around the fastest path to a repeat order, and back it with connected services for accounts, catalogue, cart and promotions, payments, delivery addresses and order status, plus an administration platform.",
     solution:
-      "An iOS and Android commerce product supported by backend APIs, PostgreSQL / Supabase, customer accounts, wallet and coupon logic, payment and COD flows, delivery tracking, notifications and an administration platform.",
-    statusNote:
-      "The platform is a production and ongoing transformation initiative. Its mobile, backend and administration surfaces are not presented as public deployments.",
+      "An iOS and Android app with Apple, Google and phone sign-in, bilingual Arabic / English screens, categories and offers, a cart with free-delivery and VAT-inclusive totals, map-based address pinning, card, Apple Pay, tabby and on-delivery payments, delivery windows and live order tracking, supported by backend APIs, PostgreSQL / Supabase, push notifications and an admin platform.",
+    statusNote: "The app is live on the App Store and Google Play.",
   },
   {
     index: "02",

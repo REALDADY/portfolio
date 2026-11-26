@@ -98,7 +98,7 @@ function ProjectActions({ project, onOpen }: { project: Project; onOpen: (slug: 
       </CaseLink>
       {project.liveUrl && (
         <a className="link-quiet" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-          Visit site<span className="sr-only">: {project.shortTitle} (opens in a new tab)</span> <Arrow direction="up-right" />
+          {project.liveUrlLabel ?? "Visit site"}<span className="sr-only">: {project.shortTitle} (opens in a new tab)</span> <Arrow direction="up-right" />
         </a>
       )}
     </div>
@@ -143,7 +143,7 @@ function CaseStudyDialog({ project, onClose, onOpen, onStartProject, onCopyLink 
             <div><dt>Status</dt><dd><StatusTag project={project} /></dd></div>
           </dl>
         </header>
-        <ProjectVisual project={project} priority />
+        <ProjectVisual project={project} priority full />
         <div className="case-body">
           <section><h3>Challenge</h3><p>{project.challenge}</p></section>
           <section><h3>Approach</h3><p>{project.approach}</p></section>
@@ -154,7 +154,8 @@ function CaseStudyDialog({ project, onClose, onOpen, onStartProject, onCopyLink 
         </div>
         {(project.liveUrl || project.relatedUrl) && (
           <div className="case-links">
-            {project.liveUrl && <a className="button button-primary" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit live site <Arrow direction="up-right" /></a>}
+            {project.liveUrl && <a className="button button-primary" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{project.liveUrlLabel ?? "Visit live site"} <Arrow direction="up-right" /></a>}
+            {project.storeLinks?.map((store) => <a key={store.url} className="button button-secondary" href={store.url} target="_blank" rel="noopener noreferrer">{store.label} <Arrow direction="up-right" /></a>)}
             {project.relatedUrl && <a className="button button-secondary" href={project.relatedUrl} target="_blank" rel="noopener noreferrer">{project.relatedUrlLabel ?? "View related project"} <Arrow direction="up-right" /></a>}
           </div>
         )}
@@ -289,7 +290,7 @@ function Hero({ onSection, onWork }: { onSection: (id: SectionId) => void; onWor
       </figure>
       <ul className="hero-stats" aria-label="At a glance">
         <li><strong>{projects.length}</strong><span>Projects across web, product and systems</span></li>
-        <li><strong>{liveProjects.length}</strong><span>Live public websites</span></li>
+        <li><strong>{liveProjects.length}</strong><span>Live websites &amp; apps</span></li>
         <li><strong>EN / AR</strong><span>Bilingual, right-to-left interfaces</span></li>
         <li><strong>{owner.locality}</strong><span>{owner.countryName}</span></li>
       </ul>
@@ -562,7 +563,7 @@ function WorkView({ category, dubaiTime, onCategory, onOpen, onCopyEmail }: {
         <p className="section-intro">Websites, product interfaces and deeper systems work — from bilingual commerce to SAP, infrastructure and cybersecurity — each shown with its real public, private or production status.</p>
         <ul className="work-stats" aria-label="Index summary">
           <li><strong>{projects.length}</strong> projects</li>
-          <li><strong>{liveProjects.length}</strong> live public sites</li>
+          <li><strong>{liveProjects.length}</strong> live websites &amp; apps</li>
           <li><strong>{privateCount}</strong> private, production or case-study builds</li>
         </ul>
       </section>

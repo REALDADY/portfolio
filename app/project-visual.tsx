@@ -1,6 +1,6 @@
 import { imageSizes, type Project } from "./project-data";
 
-type VisualProps = { project: Project; compact?: boolean; priority?: boolean };
+type VisualProps = { project: Project; compact?: boolean; priority?: boolean; full?: boolean };
 
 const hostOf = (url?: string) => (url ? new URL(url).host.replace(/^www\./, "") : null);
 
@@ -9,7 +9,23 @@ const hostOf = (url?: string) => (url ? new URL(url).host.replace(/^www\./, "") 
  * in a browser frame; private and internal systems get a spec panel built from
  * the project's real scope — never a staged or generated image.
  */
-export function ProjectVisual({ project, compact = false, priority = false }: VisualProps) {
+export function ProjectVisual({ project, compact = false, priority = false, full = false }: VisualProps) {
+  if (project.appScreens?.length) {
+    const screens = full ? project.appScreens : project.appScreens.slice(0, compact ? 3 : 4);
+    return (
+      <figure className={`phones${compact ? " is-compact" : ""}${full ? " is-full" : ""}`}>
+        <ul>
+          {screens.map((screen) => (
+            <li key={screen.src}>
+              <img src={screen.src} alt={screen.alt} width={600} height={1304} loading={priority ? "eager" : "lazy"} decoding="async" />
+            </li>
+          ))}
+        </ul>
+        {full && <figcaption>Screens from the live app — scroll for more</figcaption>}
+      </figure>
+    );
+  }
+
   if (project.coverAsset) {
     const size = imageSizes[project.coverAsset];
     return (

@@ -19,6 +19,8 @@ test("index.html is prerendered with homepage content and head tags", async () =
   assert.match(root, /Alrawdah Digital Platform/);
   assert.match(root, /Kifaya/);
   assert.match(root, /AR Green/);
+  assert.match(root, /\/projects\/alrawdah-app\/02-home\.jpg/);
+  assert.match(root, /href="https:\/\/onelink\.to\/jb4gmr"/);
   assert.match(root, /\/projects\/argreen\.jpg/);
   assert.match(root, /amijbari8@gmail\.com/);
   assert.match(root, /971551959820/);
