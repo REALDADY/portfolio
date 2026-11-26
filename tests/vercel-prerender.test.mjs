@@ -56,6 +56,9 @@ test("index.html is a ProfilePage whose single Person matches the visible bio", 
     "https://github.com/REALDADY",
   ]);
   assert.equal(person.image.url, `${site}/mohamed-amin-real3adi.jpg`);
+  assert.equal(person.worksFor["@id"], "https://www.haak-org.com");
+  assert.match(person.description, /co-founder of HAAK Solutions/);
+  assert.match(html, /Co-founder, <a href="https:\/\/haak-org\.com\/"/);
   // Every sameAs profile is also a visible rel="me" link, and the headshot is on the page.
   for (const url of person.sameAs) assert.ok(html.includes(`href="${url}" rel="me`), `${url} is linked visibly`);
   assert.match(html, /<img src="\/mohamed-amin-real3adi\.jpg" alt="Portrait of Mohamed Amin \(real3adi\)/);

@@ -27,9 +27,17 @@ export const owner = {
   countryName: "United Arab Emirates",
 } as const;
 
+/** Company Mohamed Amin co-founded; @id matches the one haak-org.com publishes. */
+export const company = {
+  id: "https://www.haak-org.com",
+  name: "HAAK Solutions",
+  url: "https://haak-org.com/",
+  role: "Co-founder",
+} as const;
+
 /** Third-person bio shared by the visible About section and Person.description. */
 export const personBio =
-  "Mohamed Amin, known online as real3adi, is a Dubai-based designer and full-stack developer who designs websites and product interfaces, builds the apps and APIs behind them, and runs the infrastructure, security and SAP systems they depend on.";
+  "Mohamed Amin, known online as real3adi, is a Dubai-based designer, full-stack developer and co-founder of HAAK Solutions who designs websites and product interfaces, builds the apps and APIs behind them, and runs the infrastructure, security and SAP systems they depend on.";
 
 /**
  * Official personal profiles — only accounts verified as Mohamed Amin's own.
@@ -223,6 +231,16 @@ export function buildJsonLd(route: RouteKey = "home", modified = todayIso()) {
           },
           mainEntityOfPage: { "@id": ids.profilePage },
           sameAs: profiles.map((profile) => profile.url),
+          worksFor: {
+            "@type": "Organization",
+            "@id": company.id,
+            name: company.name,
+            url: company.url,
+          },
+          hasOccupation: {
+            "@type": "Role",
+            roleName: company.role,
+          },
           email: `mailto:${contact.email}`,
           telephone: contact.phoneE164,
           address,

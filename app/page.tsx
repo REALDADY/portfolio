@@ -13,7 +13,7 @@ import {
   type ProjectCategory,
 } from "./project-data";
 import { ProjectVisual } from "./project-visual";
-import { contact, headshot, mailtoLink, owner, profiles, routeSeo, whatsappLink } from "./site-config";
+import { company, contact, headshot, mailtoLink, owner, profiles, routeSeo, whatsappLink } from "./site-config";
 import { FlightHud, SpaceCanvas } from "./space-canvas";
 import { SITE_CONTENT_ID, useModal } from "./use-modal";
 import { prefersReducedMotion, scrollToTarget, setScrollLock, useMotionSystem } from "./use-motion-system";
@@ -349,6 +349,7 @@ function AboutSection({ onContact, onWork }: { onContact: () => void; onWork: ()
             <figcaption>
               <b>{owner.name}</b>
               <span>{`${owner.alternateName} · ${owner.jobTitle}`}</span>
+              <span>{`${company.role}, `}<a href={company.url} target="_blank" rel="noopener noreferrer">{company.name}</a></span>
               <span>{`${owner.locality}, ${owner.countryName}`}</span>
             </figcaption>
           </figure>
@@ -358,6 +359,7 @@ function AboutSection({ onContact, onWork }: { onContact: () => void; onWork: ()
           <dl className="about-facts">
             <div><dt>Base</dt><dd>Dubai, United Arab Emirates</dd></div>
             <div><dt>Practice</dt><dd>Web design · Full-stack · Systems</dd></div>
+            <div><dt>Company</dt><dd>{`${company.role}, `}<a href={company.url} target="_blank" rel="noopener noreferrer">{company.name}</a></dd></div>
             <div><dt>Payload</dt><dd>Public websites, private platforms, production infrastructure</dd></div>
           </dl>
           <p className="about-profiles">
