@@ -63,7 +63,7 @@ test("homepage ships search metadata and structured data", async () => {
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /"@type":"ProfilePage"/);
   assert.match(html, /"@type":"Person"/);
-  assert.match(html, /"alternateName":"real3adi"/);
+  assert.match(html, /"alternateName":\["real3adi","Mohamed Amin Jbari"/);
   assert.match(html, /"@type":"ProfessionalService"/);
   assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /"addressLocality":"Dubai"/);

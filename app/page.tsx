@@ -360,6 +360,7 @@ function AboutSection() {
         </div>
         <div className="about-side">
           <dl className="facts">
+            <div><dt>Full name</dt><dd>{`${owner.fullName} · `}<span lang="ar" dir="rtl">{owner.arabicName}</span></dd></div>
             <div><dt>Based in</dt><dd>Dubai, United Arab Emirates</dd></div>
             <div><dt>Company</dt><dd>{`${company.role}, `}<a href={company.url} target="_blank" rel="noopener noreferrer">{company.name}</a></dd></div>
             <div><dt>Practice</dt><dd>Web design · Full-stack · Systems</dd></div>

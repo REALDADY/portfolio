@@ -17,6 +17,9 @@ export const owner = {
   name: "Mohamed Amin",
   /** Public handle used across the web. */
   alternateName: "real3adi",
+  /** Full name with family name, and the Arabic spelling — both shown in About. */
+  fullName: "Mohamed Amin Jbari",
+  arabicName: "محمد امين اجباري",
   /** Visible "name (handle)" form, so the page text matches the structured data. */
   displayName: "Mohamed Amin (real3adi)",
   jobTitle: "Designer & Full-Stack Developer",
@@ -216,7 +219,7 @@ export function buildJsonLd(route: RouteKey = "home", modified = todayIso()) {
           "@type": "Person",
           "@id": ids.person,
           name: owner.name,
-          alternateName: owner.alternateName,
+          alternateName: [owner.alternateName, owner.fullName, owner.arabicName],
           jobTitle: owner.jobTitle,
           description: personBio,
           url: `${SITE_URL}/`,

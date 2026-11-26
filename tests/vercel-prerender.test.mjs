@@ -53,7 +53,9 @@ test("index.html is a ProfilePage whose single Person matches the visible bio", 
   assert.equal(person["@type"], "Person");
   assert.equal(person["@id"], `${site}/#person`);
   assert.equal(person.name, "Mohamed Amin");
-  assert.equal(person.alternateName, "real3adi");
+  assert.deepEqual(person.alternateName, ["real3adi", "Mohamed Amin Jbari", "محمد امين اجباري"]);
+  // Every alternate name is also visible on the page.
+  assert.match(html, /Mohamed Amin Jbari · <span lang="ar" dir="rtl">محمد امين اجباري<\/span>/);
   assert.deepEqual(person.sameAs, [
     "https://www.linkedin.com/in/mohamed-amin-jbari-223237364/",
     "https://www.instagram.com/real3adi/",
