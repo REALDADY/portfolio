@@ -610,6 +610,42 @@ export const projects: Project[] = [
     statusNote:
       "This is a build presented as a case study. No public deployment is claimed.",
   },
+  {
+    index: "18",
+    slug: "ar-green-corporate-website",
+    title: "AR Green — Corporate Website",
+    shortTitle: "AR Green",
+    shortDescription:
+      "A bilingual English / Arabic corporate website for a UAE bottled-water manufacturer, built from scratch with technical SEO and enquiry journeys for private label and co filling.",
+    category: "Web",
+    projectType: "Corporate Website · Bilingual EN / AR · Technical SEO",
+    status: "Live Public Website",
+    statusKind: "live",
+    featured: true,
+    role: "Design · Development from scratch · Technical SEO",
+    technologies: ["Astro", "Static site", "Arabic / English", "Structured data", "EmailJS", "Hostinger"],
+    capabilities: [
+      "English and Arabic (RTL) site",
+      "Alrawdah Springs and Revana brand pages",
+      "Private label and co filling enquiries",
+      "Organization and Brand structured data",
+      "hreflang and XML sitemap",
+      "Consent-managed analytics",
+      "llms.txt and agent-readable pages",
+      "Blog",
+    ],
+    liveUrl: "https://www.argreen.ae/en/",
+    coverAsset: "/projects/argreen.jpg",
+    coverAlt: "AR Green corporate website homepage — premium bottled drinking water produced in the UAE since 2003",
+    visual: "browser",
+    challenge:
+      "Give a long-established UAE water manufacturer a credible corporate presence that explains its brands, quality and production, and turns business visitors into private label and co filling enquiries, in English and Arabic.",
+    approach:
+      "Design and build the site from scratch as a fast static Astro site, with a full English / Arabic structure, clear B2B journeys and search foundations built in from the start rather than added later.",
+    solution:
+      "A bilingual Astro website covering the company, its Alrawdah Springs and Revana brands, quality, sustainability, co filling and a blog, with enquiry forms, consent-managed analytics, hreflang, Organization and Brand structured data, an XML sitemap and agent-readable resources.",
+    statusNote: "This website is live at argreen.ae.",
+  },
 ];
 
 export type LabExperiment = {
@@ -634,6 +670,7 @@ export const labExperiments: LabExperiment[] = [
 
 const featuredProjectOrder = [
   "alrawdah-public-commerce-website",
+  "ar-green-corporate-website",
   "haak-solutions",
   "revana-bottled-water-website",
   "alrawdah-digital-commerce-platform",
@@ -652,6 +689,7 @@ export const imageSizes: Record<string, { width: number; height: number }> = {
   "/projects/rs-water.png": { width: 1272, height: 716 },
   "/projects/haak-solutions.jpg": { width: 1280, height: 800 },
   "/projects/revana.jpg": { width: 1280, height: 800 },
+  "/projects/argreen.jpg": { width: 1280, height: 800 },
   "/projects/sahaba.png": { width: 1265, height: 712 },
 };
 

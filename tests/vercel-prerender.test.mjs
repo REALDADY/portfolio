@@ -18,6 +18,8 @@ test("index.html is prerendered with homepage content and head tags", async () =
   assert.match(root, /I design the interface/);
   assert.match(root, /Alrawdah Digital Platform/);
   assert.match(root, /Kifaya/);
+  assert.match(root, /AR Green/);
+  assert.match(root, /\/projects\/argreen\.jpg/);
   assert.match(root, /amijbari8@gmail\.com/);
   assert.match(root, /971551959820/);
   assert.doesNotMatch(html, /seo:start|seo:end/);
