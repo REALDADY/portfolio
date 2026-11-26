@@ -198,6 +198,10 @@ section[tabindex="-1"]:focus { outline: none; }
 .about-facts div + div { padding-left: 16px; border-left: 1px solid var(--line); }
 .about-facts dt { margin-bottom: 8px; color: var(--text-subtle); font: 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
 .about-facts dd { color: var(--text); font-size: 14px; line-height: 1.45; }
+.about-profiles { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 24px; color: var(--text-subtle); font: 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.about-profiles a { display: inline-flex; align-items: center; gap: 6px; color: var(--text); }
+.about-profiles a:hover { color: var(--yellow); }
+.about-profiles svg { width: 12px; height: 12px; }
 .about-terminal { position: sticky; top: calc(var(--header-h) + 24px); }
 .terminal-caption { margin-top: 12px; color: var(--text-subtle); font-size: 13px; }
 .terminal-caption code { color: var(--yellow); }

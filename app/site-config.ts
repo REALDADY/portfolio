@@ -7,12 +7,18 @@ import { projects } from "./project-data";
  */
 // The public origin, overridable per deployment (e.g. GitHub Pages sets VITE_SITE_URL at build time).
 const configuredUrl = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env?.VITE_SITE_URL;
-export const SITE_URL = (configuredUrl || "https://amin-built-to-operate.vercel.app").replace(/\/+$/, "");
-export const SITE_NAME = "Amin — Designer & Full-Stack Developer";
+// Production canonical origin: the real3adi.space custom domain on GitHub Pages.
+export const SITE_URL = (configuredUrl || "https://real3adi.space").replace(/\/+$/, "");
+export const SITE_NAME = "Mohamed Amin (real3adi) — Designer & Full-Stack Developer";
 export const THEME_COLOR = "#07060b";
 
 export const owner = {
-  name: "Amin",
+  /** Full legal name — the entity name in structured data. */
+  name: "Mohamed Amin",
+  /** Public handle used across the web. */
+  alternateName: "real3adi",
+  /** Visible "name (handle)" form, so the page text matches the structured data. */
+  displayName: "Mohamed Amin (real3adi)",
   jobTitle: "Designer & Full-Stack Developer",
   summary:
     "Dubai-based designer and full-stack developer. I design websites and product interfaces, build the apps and APIs behind them, and run the infrastructure, security and SAP systems they depend on.",
@@ -20,6 +26,18 @@ export const owner = {
   country: "AE",
   countryName: "United Arab Emirates",
 } as const;
+
+/** Third-person bio shared by the visible About section and Person.description. */
+export const personBio =
+  "Mohamed Amin, known online as real3adi, is a Dubai-based designer and full-stack developer who designs websites and product interfaces, builds the apps and APIs behind them, and runs the infrastructure, security and SAP systems they depend on.";
+
+/**
+ * Official personal profiles — only accounts verified as Mohamed Amin's own.
+ * Rendered as visible rel="me" links and emitted as Person.sameAs.
+ */
+export const profiles = [
+  { label: "GitHub", handle: "REALDADY", url: "https://github.com/REALDADY" },
+] as const;
 
 export const contact = {
   email: "amijbari8@gmail.com",
@@ -63,16 +81,16 @@ export type RouteKey = "home" | "work";
 export const routeSeo: Record<RouteKey, { path: string; title: string; description: string; ogTitle: string }> = {
   home: {
     path: "/",
-    title: "Amin — Designer & Full-Stack Developer in Dubai, UAE",
+    title: "Mohamed Amin (real3adi) — Designer & Full-Stack Developer in Dubai",
     description:
-      "Dubai-based designer and full-stack developer building websites, web apps and the enterprise systems behind them — infrastructure, cybersecurity and SAP.",
-    ogTitle: "Amin — I design the interface. I build what makes it work.",
+      "Mohamed Amin (real3adi) is a Dubai-based designer and full-stack developer building websites, web apps and the enterprise systems behind them — infrastructure, cybersecurity and SAP.",
+    ogTitle: "Mohamed Amin (real3adi) — I design the interface. I build what makes it work.",
   },
   work: {
     path: "/work",
-    title: "Work — Web, Product & Enterprise Systems Case Studies | Amin",
+    title: "Work — Web, Product & Enterprise Systems Case Studies | Mohamed Amin",
     description: `${projects.length} case studies from Dubai: commerce websites, product platforms, internal tools, IT infrastructure, cybersecurity hardening and SAP Business One.`,
-    ogTitle: "The work, in full — Amin, Dubai",
+    ogTitle: "The work, in full — Mohamed Amin (real3adi), Dubai",
   },
 };
 
@@ -80,49 +98,130 @@ export const ogImage = {
   url: `${SITE_URL}/og-systems.png`,
   width: 1200,
   height: 630,
-  alt: "Amin — designer and full-stack developer in Dubai",
+  alt: "Mohamed Amin (real3adi) — designer and full-stack developer in Dubai",
 } as const;
 
 export const absoluteUrl = (path: string) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`);
 
-export function buildJsonLd() {
-  const personId = `${SITE_URL}/#person`;
+/** Stable entity ids. The person lives on the canonical homepage, which is the profile page. */
+export const ids = {
+  person: `${SITE_URL}/#person`,
+  profilePage: `${SITE_URL}/#profilepage`,
+  website: `${SITE_URL}/#website`,
+  service: `${SITE_URL}/#service`,
+  workPage: `${SITE_URL}/work#webpage`,
+  projects: `${SITE_URL}/work#projects`,
+} as const;
+
+/** First publication of the profile page on real3adi.space. */
+const PROFILE_CREATED = "2026-09-27";
+
+const todayIso = () => new Date().toISOString().slice(0, 10);
+
+/**
+ * Structured data per route. The homepage is a ProfilePage whose mainEntity is
+ * the one full Person definition; every other node (and the /work page)
+ * points at that Person by @id, so there is never a second Person block.
+ */
+export function buildJsonLd(route: RouteKey = "home", modified = todayIso()) {
+  const person = { "@id": ids.person };
+  const address = { "@type": "PostalAddress", addressLocality: owner.locality, addressCountry: owner.country };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": ids.website,
+    url: `${SITE_URL}/`,
+    name: SITE_NAME,
+    alternateName: owner.alternateName,
+    description: routeSeo.home.description,
+    inLanguage: "en",
+    publisher: person,
+  };
+
+  const projectList = {
+    "@type": "ItemList",
+    "@id": ids.projects,
+    name: "Projects and case studies",
+    numberOfItems: projects.length,
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: project.title,
+        description: project.shortDescription,
+        url: project.liveUrl ?? `${SITE_URL}/work#case/${project.slug}`,
+        genre: project.category,
+        keywords: project.technologies.join(", "),
+        creator: person,
+      },
+    })),
+  };
+
+  if (route === "work") {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": ids.workPage,
+          url: absoluteUrl(routeSeo.work.path),
+          name: routeSeo.work.title,
+          description: routeSeo.work.description,
+          inLanguage: "en",
+          isPartOf: { "@id": ids.website },
+          about: person,
+          author: person,
+          mainEntity: { "@id": ids.projects },
+        },
+        website,
+        projectList,
+      ],
+    };
+  }
+
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Person",
-        "@id": personId,
-        name: owner.name,
-        jobTitle: owner.jobTitle,
-        description: owner.summary,
+        "@type": "ProfilePage",
+        "@id": ids.profilePage,
         url: `${SITE_URL}/`,
-        image: ogImage.url,
-        email: `mailto:${contact.email}`,
-        telephone: contact.phoneE164,
-        address: { "@type": "PostalAddress", addressLocality: owner.locality, addressCountry: owner.country },
-        knowsAbout,
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        url: `${SITE_URL}/`,
-        name: SITE_NAME,
+        name: routeSeo.home.title,
         description: routeSeo.home.description,
         inLanguage: "en",
-        publisher: { "@id": personId },
+        isPartOf: { "@id": ids.website },
+        dateCreated: PROFILE_CREATED,
+        dateModified: modified,
+        mainEntity: {
+          "@type": "Person",
+          "@id": ids.person,
+          name: owner.name,
+          alternateName: owner.alternateName,
+          jobTitle: owner.jobTitle,
+          description: personBio,
+          url: `${SITE_URL}/`,
+          mainEntityOfPage: { "@id": ids.profilePage },
+          sameAs: profiles.map((profile) => profile.url),
+          email: `mailto:${contact.email}`,
+          telephone: contact.phoneE164,
+          address,
+          homeLocation: { "@type": "Place", name: `${owner.locality}, ${owner.countryName}` },
+          knowsAbout,
+        },
       },
+      website,
       {
         "@type": "ProfessionalService",
-        "@id": `${SITE_URL}/#service`,
-        name: `${owner.name} — Design & Engineering`,
+        "@id": ids.service,
+        name: `${owner.displayName} — Design & Engineering`,
         description: owner.summary,
         url: `${SITE_URL}/`,
         image: ogImage.url,
         email: contact.email,
         telephone: contact.phoneE164,
-        address: { "@type": "PostalAddress", addressLocality: owner.locality, addressCountry: owner.country },
-        founder: { "@id": personId },
+        address,
+        founder: person,
         knowsAbout,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -137,31 +236,13 @@ export function buildJsonLd() {
           ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
         },
       },
-      {
-        "@type": "ItemList",
-        "@id": `${SITE_URL}/work#projects`,
-        name: "Projects and case studies",
-        numberOfItems: projects.length,
-        itemListElement: projects.map((project, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          item: {
-            "@type": "CreativeWork",
-            name: project.title,
-            description: project.shortDescription,
-            url: project.liveUrl ?? `${SITE_URL}/work#case/${project.slug}`,
-            genre: project.category,
-            keywords: project.technologies.join(", "),
-            creator: { "@id": personId },
-          },
-        })),
-      },
+      projectList,
     ],
   };
 }
 
 /** JSON for a <script type="application/ld+json"> body; `<` is escaped so it can never close the tag. */
-export const serializeJsonLd = () => JSON.stringify(buildJsonLd()).replace(/</g, "\\u003c");
+export const serializeJsonLd = (route: RouteKey = "home") => JSON.stringify(buildJsonLd(route)).replace(/</g, "\\u003c");
 
 const escapeAttribute = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -194,7 +275,8 @@ export function buildHeadTags(route: RouteKey) {
     meta("name", "twitter:description", seo.description),
     meta("name", "twitter:image", ogImage.url),
     meta("name", "twitter:image:alt", ogImage.alt),
-    `<script type="application/ld+json">${serializeJsonLd()}</script>`,
+    ...profiles.map((profile) => `<link rel="me" href="${escapeAttribute(profile.url)}" />`),
+    `<script type="application/ld+json">${serializeJsonLd(route)}</script>`,
   ].join("\n    ");
 }
 

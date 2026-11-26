@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amin-built-to-operate.vercel.app/sitemap.xml
+Sitemap: https://real3adi.space/sitemap.xml

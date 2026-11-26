@@ -14,7 +14,7 @@ async function render(path = "/") {
   );
 }
 
-const SITE = "https://amin-built-to-operate\\.vercel\\.app";
+const SITE = "https://real3adi\\.space";
 const countMatches = (html, pattern) => (html.match(pattern) ?? []).length;
 
 test("renders the professional portfolio homepage", async () => {
@@ -57,7 +57,9 @@ test("homepage ships search metadata and structured data", async () => {
   assert.match(html, new RegExp(`<link(?=[^>]*rel="canonical")(?=[^>]*href="${SITE}/?")[^>]*>`));
   assert.match(html, new RegExp(`og:image"[^>]*content="${SITE}/og-systems\\.png"|content="${SITE}/og-systems\\.png"[^>]*og:image"`));
   assert.match(html, /application\/ld\+json/);
+  assert.match(html, /"@type":"ProfilePage"/);
   assert.match(html, /"@type":"Person"/);
+  assert.match(html, /"alternateName":"real3adi"/);
   assert.match(html, /"@type":"ProfessionalService"/);
   assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /"addressLocality":"Dubai"/);

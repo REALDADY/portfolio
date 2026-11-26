@@ -13,7 +13,7 @@ import {
   type ProjectCategory,
 } from "./project-data";
 import { ProjectVisual } from "./project-visual";
-import { contact, mailtoLink, owner, routeSeo, whatsappLink } from "./site-config";
+import { contact, mailtoLink, owner, profiles, routeSeo, whatsappLink } from "./site-config";
 import { FlightHud, SpaceCanvas } from "./space-canvas";
 import { SITE_CONTENT_ID, useModal } from "./use-modal";
 import { prefersReducedMotion, scrollToTarget, setScrollLock, useMotionSystem } from "./use-motion-system";
@@ -245,7 +245,7 @@ function SiteHeader({ view, menuOpen, scrolled, activeSection, modKey, onMenu, o
 
   return (
     <header className={`site-header${scrolled || view === "work" ? " is-scrolled" : ""}${menuOpen ? " menu-open" : ""}`} ref={headerRef}>
-      <a className="wordmark" href="/" aria-label="Amin — home" onClick={(event) => { if (!isPlainClick(event)) return; event.preventDefault(); onHome(); }}>
+      <a className="wordmark" href="/" aria-label={`${owner.displayName} — home`} onClick={(event) => { if (!isPlainClick(event)) return; event.preventDefault(); onHome(); }}>
         <OrbitMark />
         <span className="wordmark-text" aria-hidden="true"><b>Amin</b><small>Design · Code · Systems</small></span>
       </a>
@@ -306,7 +306,7 @@ function Hero({ dubaiTime, modKey, onSection, onWork, onPalette }: { dubaiTime: 
       </div>
       <div className="hero-content">
         <h1 className="hero-title" id="hero-title">
-          <span className="hero-title-kicker">Amin — designer & full-stack developer in Dubai</span>{" "}
+          <span className="hero-title-kicker">{`${owner.displayName} — designer & full-stack developer in Dubai`}</span>{" "}
           <span className="hero-line"><span>I design the interface.</span></span>{" "}
           <span className="hero-line"><em>I build what makes it work.</em></span>
         </h1>
@@ -345,13 +345,21 @@ function AboutSection({ onContact, onWork }: { onContact: () => void; onWork: ()
       <div className="about-grid">
         <div className="about-copy" data-reveal>
           <h2 id="about-title">One developer across the whole stack — from the <em>first pixel</em> to the <em>production server.</em></h2>
-          <p>I’m {owner.name}, a designer and full-stack developer based in Dubai. My work usually starts with visual direction and interface design, then continues through front-end and back-end development, launch, and the infrastructure it runs on.</p>
+          <p>I’m <strong>{owner.name}</strong> — known online as <strong>{owner.alternateName}</strong> — a designer and full-stack developer based in Dubai. My work usually starts with visual direction and interface design, then continues through front-end and back-end development, launch, and the infrastructure it runs on.</p>
           <p>That range matters when a project involves commerce, bilingual Arabic / English journeys, internal workflows, integrations, security or SAP — not just a marketing page. You work with one accountable owner instead of a hand-off chain.</p>
           <dl className="about-facts">
             <div><dt>Base</dt><dd>Dubai, United Arab Emirates</dd></div>
             <div><dt>Practice</dt><dd>Web design · Full-stack · Systems</dd></div>
             <div><dt>Payload</dt><dd>Public websites, private platforms, production infrastructure</dd></div>
           </dl>
+          <p className="about-profiles">
+            <span>{`Elsewhere as ${owner.alternateName}`}</span>
+            {profiles.map((profile) => (
+              <a key={profile.url} href={profile.url} rel="me noopener noreferrer" target="_blank">
+                {`${profile.label} · ${profile.handle}`}<span className="sr-only"> (opens in a new tab)</span> <Arrow direction="up-right" />
+              </a>
+            ))}
+          </p>
         </div>
         <div className="about-terminal" data-reveal>
           <WhoamiTerminal onContact={onContact} onWork={onWork} />
@@ -688,7 +696,7 @@ function SiteFooter({ modKey, onHome, onWork, onSection, onPalette }: { modKey: 
     <footer className="site-footer section-shell">
       <div className="footer-top">
         <a className="footer-mark" href="/" onClick={(event) => { if (!isPlainClick(event)) return; event.preventDefault(); onHome(); }}>Amin<span aria-hidden="true">.</span></a>
-        <p>Designer & full-stack developer in Dubai, UAE — websites, products, enterprise systems and the infrastructure underneath.</p>
+        <p>{owner.displayName} — designer & full-stack developer in Dubai, UAE. Websites, products, enterprise systems and the infrastructure underneath.</p>
       </div>
       <div className="footer-cols">
         <nav aria-label="Footer">
@@ -703,10 +711,13 @@ function SiteFooter({ modKey, onHome, onWork, onSection, onPalette }: { modKey: 
         <div className="footer-contact">
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer">WhatsApp · {contact.phoneDisplay}</a>
+          {profiles.map((profile) => (
+            <a key={profile.url} href={profile.url} target="_blank" rel="me noopener noreferrer">{`${profile.label} · ${profile.handle}`}</a>
+          ))}
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> Amin · Dubai, UAE · Rendered in WebGL</span>
+        <span>© <span suppressHydrationWarning>{new Date().getFullYear()}</span> {owner.displayName} · Dubai, UAE · Rendered in WebGL</span>
         <button type="button" onClick={onPalette}><kbd>{modKey}K</kbd> Command palette</button>
         <a href="#top" onClick={(event) => { if (!isPlainClick(event)) return; event.preventDefault(); scrollToTarget("top"); }}>Return to launch <Arrow direction="up-right" /></a>
       </div>
